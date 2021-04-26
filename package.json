@@ -1,6 +1,6 @@
 {
-  "name": "html2json",
-  "version": "1.0.2",
+  "name": "html2json_2",
+  "version": "1.0.3",
   "description": "html to json & json to html",
   "main": "index.js",
   "directories": {
@@ -12,18 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jxck/html2json.git"
+    "url": "git+https://github.com/sundeepnarang/html2json.git"
   },
   "keywords": [
     "html",
     "json"
   ],
-  "author": "Jxck",
+  "author": "Sundeep",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jxck/html2json/issues"
+    "url": "https://github.com/sundeepnarang/html2json/issues"
   },
-  "homepage": "https://github.com/jxck/html2json#readme",
+  "homepage": "https://github.com/sundeepnarang/html2json#readme",
   "devDependencies": {
     "eslint": "^2.6.0",
     "mocha": "^2.4.5"
