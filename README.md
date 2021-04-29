@@ -1,5 +1,13 @@
 # html2json & json2html
 
+## Changes
+
+Based on [this](https://github.com/jxck/html2json).
+
+* Fixed htmlparser issue
+* Separated style attr and parsed it
+
+
 ## How to use
 
 ### browser
@@ -47,7 +55,7 @@ members of `node` are
 
 `root` node is the root of JSON, every JSON must have only one root `root`, could have `child`.
 
-`element` node represents html element, could have `tag`, `attr`, `child`.
+`element` node represents html element, could have `tag`, `attr`, `child`, `style`.
 
 `text` node represents text element, could have `text`.
 
@@ -112,10 +120,9 @@ json:
 
 ## Dependencies
 
-[htmlparser.js](https://github.com/blowsie/Pure-JavaScript-HTML5-Parser)
+[htmlparser.js](https://github.com/sundeepnarang/Pure-JavaScript-HTML5-Parser)
 
-repositry includes this at `lib/` as git subtree.
-
+Originally [here](https://github.cosm/blowsie/Pure-JavaScript-HTML5-Parser)
 
 ## CHANGELOG
 
