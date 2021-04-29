@@ -10,16 +10,6 @@ Based on [this](https://github.com/jxck/html2json).
 
 ## How to use
 
-### browser
-
-include htmlparser.js & html2json.js scripts:
-
-```html
-<script src="https://cdn.rawgit.com/blowsie/Pure-JavaScript-HTML5-Parser/master/htmlparser.js"></script>
-<script src="src/html2json.js"></script>
-```
-
-
 ### node
 
 ```sh
@@ -27,8 +17,8 @@ $ npm install html2json
 ```
 
 ```javascript
-var html2json = require('html2json').html2json;
-var json2html = require('html2json').json2html;
+var html2json = require('html2json_2').html2json;
+var json2html = require('html2json_2').json2html;
 ```
 
 
@@ -67,7 +57,7 @@ members of `node` are
 html:
 
 ```html
-<div id="1" class="foo">
+<div id="1" class="foo" style="margin: 0">
 <h2>sample text with <code>inline tag</code></h2>
 <pre id="demo" class="foo bar">foo</pre>
 <pre id="output" class="goo">goo</pre>
@@ -85,6 +75,7 @@ json:
       node: 'element',
       tag: 'div',
       attr: { id: '1', class: 'foo' },
+      style: {margin: '0'},  
       child: [
         {
           node: 'element',
