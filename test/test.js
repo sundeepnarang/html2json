@@ -146,7 +146,7 @@ describe('html2json', function() {
             class: ['bar', 'goo']
           },
           style: {
-            margin: '0'
+            margin: '0 '
           },
           child: [
             {

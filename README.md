@@ -6,6 +6,7 @@ Based on [this](https://github.com/jxck/html2json).
 
 * Fixed htmlparser issue
 * Separated style attr and parsed it
+* Added option to remove non-rendering spaces in block nodes.
 
 
 ## How to use
@@ -31,6 +32,9 @@ html === json2html(json);
 console.assert(json === html);
 ```
 
+```javascript
+json === html2json(document.body.innerHTML, {removeNonRenderingSpaces: true});
+```
 
 ### JSON format
 
@@ -108,6 +112,268 @@ json:
 }
 ```
 
+#### With spaces removed
+
+html:
+
+```html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Tests</title>
+</head>
+<body>
+    <div>
+        <p>
+            <font>Test 1</font>
+        </p>
+        <p>
+            test 2
+            <font>test 3</font>test 4
+            test 5
+        </p>
+        <p>test6
+            <font>   test 7      </font><font>test    8</font>
+            test 9
+        </p>
+        <p>
+            <font style="display: inline-block">Test 1</font>
+        </p>
+        <p>
+            test 2
+            <font style="display: inline-block">test 3</font>test 4
+            test 5
+        </p>
+        <p>test6
+            <font style="display: inline-block">   test 7      </font><font style="display: inline-block">test    8</font>
+            test 9
+        </p>
+    </div>
+</body>
+</html>
+```
+
+json:
+
+```javascript
+{
+  "node": "root",
+  "child": [
+    {
+      "node": "element",
+      "tag": "html",
+      "attr": {
+        "lang": "en"
+      },
+      "child": [
+        {
+          "node": "element",
+          "tag": "head",
+          "child": [
+            {
+              "node": "element",
+              "tag": "meta",
+              "attr": {
+                "charset": "UTF-8"
+              }
+            },
+            {
+              "node": "text",
+              "text": " "
+            },
+            {
+              "node": "element",
+              "tag": "title",
+              "child": [
+                {
+                  "node": "text",
+                  "text": "Space Tests"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "element",
+          "tag": "body",
+          "child": [
+            {
+              "node": "element",
+              "tag": "div",
+              "child": [
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "Test 1"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "text",
+                      "text": "test 2\n            "
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "test 3"
+                        }
+                      ]
+                    },
+                    {
+                      "node": "text",
+                      "text": "test 4\n            test 5"
+                    }
+                  ]
+                },
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "text",
+                      "text": "test6\n            "
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "   test 7      "
+                        }
+                      ]
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "test    8"
+                        }
+                      ]
+                    },
+                    {
+                      "node": "text",
+                      "text": "\n            test 9"
+                    }
+                  ]
+                },
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "style": {
+                        "display": "inline-block"
+                      },
+                      "attr": {},
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "Test 1"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "text",
+                      "text": "test 2\n            "
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "style": {
+                        "display": "inline-block"
+                      },
+                      "attr": {},
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "test 3"
+                        }
+                      ]
+                    },
+                    {
+                      "node": "text",
+                      "text": "test 4\n            test 5"
+                    }
+                  ]
+                },
+                {
+                  "node": "element",
+                  "tag": "p",
+                  "child": [
+                    {
+                      "node": "text",
+                      "text": "test6\n            "
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "style": {
+                        "display": "inline-block"
+                      },
+                      "attr": {},
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "   test 7      "
+                        }
+                      ]
+                    },
+                    {
+                      "node": "element",
+                      "tag": "font",
+                      "style": {
+                        "display": "inline-block"
+                      },
+                      "attr": {},
+                      "child": [
+                        {
+                          "node": "text",
+                          "text": "test    8"
+                        }
+                      ]
+                    },
+                    {
+                      "node": "text",
+                      "text": "\n            test 9"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Dependencies
 

@@ -1,4 +1,5 @@
 const {HTMLParser} = require('./htmlparser.js');
+const {processNonRenderingSpaces} = require('./htmlSpaceHandler.js');
 
 const DEBUG = false;
 const debug = DEBUG ? console.log.bind(console) : function(){};
@@ -26,12 +27,23 @@ function processStyle(styleValue="", style={}){
   return style;
 }
 
-function html2json(html) {
+function processParents(child, parent){
+  child.parent = parent;
+  if(child.child && child.child.length>0) {
+    for (let i = 0; i < child.child.length; i++) {
+      const grandChild = child.child[i];
+      processParents(grandChild, child)
+    }
+  }
+}
+
+function html2json(html, options={}) {
   html = removeDOCTYPE(html);
   const bufArray = [];
   const results = {
     node: 'root',
     child: [],
+    parent: null
   };
   HTMLParser(html, {
     start: function(tag, attrs, unary) {
@@ -131,6 +143,14 @@ function html2json(html) {
       parent.child.push(node);
     },
   });
+  let {addParents=false, removeNonRenderingSpaces=false} = options
+  addParents = addParents || removeNonRenderingSpaces;
+  if(addParents){
+    processParents(results, null)
+  }
+  if(removeNonRenderingSpaces){
+    processNonRenderingSpaces(results)
+  }
   return results;
 }
 
@@ -159,10 +179,10 @@ function json2html(json) {
       let styleAttr = key+ ": ";
       let value = json.style[key];
       if (Array.isArray(value)) value = value.join('; ' + key + ": ");
-      return styleAttr + value;
+      return styleAttr + value + ';';
     }).join(' ');
     if (attr !== '') attr = attr + ' ' + 'style=' + q(styleAttrs);
-    else attr = attr + 'style=' + q(styleAttrs);
+    else attr = attr + ' style=' + q(styleAttrs);
   }
 
   if (json.node === 'element') {
