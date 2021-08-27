@@ -117,6 +117,7 @@ const special = makeMap("script,style");
 
 
 const HTMLParser = function (html, handler) {
+	html = html.replace(/^<!DOCTYPE.+?>([ \r\n\t]+)?/i,"");
 	let index, chars, match, last = html;
 	const stack = [];
 	stack.last = function () {
