@@ -61,9 +61,16 @@ function removeSpaces(node){
 
         if(node.child[node.child.length-1].node === "text"){
             node.child[node.child.length-1].text =
-                node.child[node.child.length-1].text.replace(/[\t\n\r ]+$/, '');
+                node.child[node.child.length-1].text =
+                    node.child[node.child.length-1].text.replace(/[\t\n\r ]+$/, '');
         }
         const indexes_to_remove = []
+
+        if(node.child[0].node === "text") {
+            node.child[0].text =
+                node.child[0].text.replace(/[\t\n\r ]+/g, ' ');
+        }
+
         for(let i=1;i<node.child.length-1;i++){
             if(is_ignorable(node.child[i])){
                 const {style:{"display":display_before=""}={}} = node.child[i-1]
@@ -77,10 +84,30 @@ function removeSpaces(node){
                     node.child[i].text = " ";
                 }
             }
+            if(node.child[i].node === "text") {
+                node.child[i].text =
+                    node.child[i].text.replace(/[\t\n\r ]+/g, ' ');
+            }
+        }
+
+        if(node.child[node.child.length-1].node === "text") {
+            node.child[node.child.length-1].text =
+                node.child[node.child.length-1].text.replace(/[\t\n\r ]+/g, ' ');
         }
 
         for(let j=indexes_to_remove.length-1;j>-1;j--){
             node.child.splice(indexes_to_remove[j], 1)
+        }
+    }
+
+    if(nodeType === "inline" && node.child){
+        if(node.child[0].node === "text"){
+            node.child[0].text =
+                node.child[0].text.replace(/^[\t\n\r ]+/, ' ');
+        }
+        if(node.child[node.child.length-1].node === "text"){
+            node.child[node.child.length-1].text =
+                node.child[node.child.length-1].text.replace(/[\t\n\r ]+$/, ' ');
         }
     }
 }
