@@ -142,6 +142,18 @@ const HTMLParser = function (html, handler) {
 				}
 
 				// end tag
+			} // Downlevel-revealed conditional Comment
+			if (html.indexOf("<![if") == 0) {
+				index = html.indexOf("<![endif]>");
+
+				if (index >= 0) {
+					if (handler.comment)
+						handler.comment(html.substring(2, index));
+					html = html.substring(index + 10);
+					chars = false;
+				}
+
+				// end tag
 			} else if (html.indexOf("</") == 0) {
 				match = html.match(endTag);
 
