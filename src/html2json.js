@@ -161,7 +161,7 @@ function json2html(json, {noSelfClosing=false}={}) {
   let child = '';
   if (json.child) {
     child = json.child.map(function(c) {
-      return json2html(c);
+      return json2html(c, {noSelfClosing});
     }).join('');
   }
 
