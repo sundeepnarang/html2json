@@ -154,7 +154,7 @@ function html2json(html, options={}) {
   return results;
 }
 
-function json2html(json, {noSelfClosing=false}) {
+function json2html(json, {noSelfClosing=false}={}) {
   // Empty Elements - HTML 4.01
   const empty = ['area', 'base', 'basefont', 'br', 'col', 'frame', 'hr', 'img', 'input', 'isindex', 'link', 'meta', 'param', 'embed'];
 
