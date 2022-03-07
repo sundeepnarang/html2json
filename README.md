@@ -383,10 +383,12 @@ Originally [here](https://github.cosm/blowsie/Pure-JavaScript-HTML5-Parser)
 
 ## CHANGELOG
 
+- 1.0.10
+  - Added option `noSelfClosing` to not self close tags in `json2html`.
 - 1.0.2
- - fix [#16](https://github.com/Jxck/html2json/issues/16) with merge [#17](https://github.com/Jxck/html2json/issues/17)
+  - fix [#16](https://github.com/Jxck/html2json/issues/16) with merge [#17](https://github.com/Jxck/html2json/issues/17)
 - 1.0.1
- - fix [#14](https://github.com/Jxck/html2json/issues/14)
+  - fix [#14](https://github.com/Jxck/html2json/issues/14)
 
 before 1.0.0
 

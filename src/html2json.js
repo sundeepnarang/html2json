@@ -154,7 +154,7 @@ function html2json(html, options={}) {
   return results;
 }
 
-function json2html(json) {
+function json2html(json, {noSelfClosing=false}) {
   // Empty Elements - HTML 4.01
   const empty = ['area', 'base', 'basefont', 'br', 'col', 'frame', 'hr', 'img', 'input', 'isindex', 'link', 'meta', 'param', 'embed'];
 
@@ -189,6 +189,9 @@ function json2html(json) {
     const tag = json.tag;
     if (empty.indexOf(tag) > -1) {
       // empty element
+      if(noSelfClosing){
+        return '<' + json.tag + attr + '>';
+      }
       return '<' + json.tag + attr + '/>';
     }
 
